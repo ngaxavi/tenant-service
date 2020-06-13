@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/ngaxavi/tenant-service/compare/v1.1.2...v1.1.3) (2020-06-13)
+
+
+### Bug Fixes
+
+* only fixing pipeline ([7cbd588](https://github.com/ngaxavi/tenant-service/commit/7cbd588241414d7483cd6f00b5ba084351a956b6))
+
 ## [1.1.2](https://github.com/ngaxavi/tenant-service/compare/v1.1.1...v1.1.2) (2020-06-13)
 
 
