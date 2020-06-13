@@ -9,10 +9,28 @@ stages:
             npm run lint
             npm run test
     when:
+      branch:
+        include:
+          - dev
+          - staging
       event:
         include:
           - push
           - pull_request
+  - name: Test Production
+    steps:
+      - runScriptConfig:
+          image: node:12-slim
+          shellScript: |-
+            npm install --quiet
+            npm audit --audit-level=moderate
+            npm run lint
+            npm run test
+    when:
+      branch: master
+      event:
+        include:
+          - push
   - name: Build Image
     steps:
       - publishImageConfig:
