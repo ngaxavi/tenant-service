@@ -1,7 +1,5 @@
 stages:
   - name: Test
-    when:
-      event: [push, pull_request]
     steps:
       - runScriptConfig:
           image: node:12-slim
@@ -10,10 +8,12 @@ stages:
             npm audit --audit-level=moderate
             npm run lint
             npm run test
-  - name: Build Image
     when:
-      branch: [dev, staging]
-      event: [push, pull_request]
+      event:
+        include:
+          - push
+          - pull_request
+  - name: Build Image
     steps:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
@@ -21,10 +21,16 @@ stages:
           tag: devops/tenant:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
           pushRemote: true
           registry: registry.ngaxavilabs.com
-  - name: Build Image Production
     when:
-      branch: master
-      event: [tag]
+      branch:
+        include:
+          - dev
+          - staging
+      event:
+        include:
+          - push
+          - pull_request
+  - name: Build Image Production
     steps:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
@@ -32,27 +38,48 @@ stages:
           tag: devops/tenant:${CICD_GIT_TAG}
           pushRemote: true
           registry: registry.ngaxavilabs.com
-
-  - name: Deploy Dev
     when:
-      branch: dev
-      event: [push, pull_request]
+      branch:
+        include:
+          - master
+      event:
+        include:
+          - push
+          - tag
+  - name: Deploy Dev
     steps:
       - applyYamlConfig:
           path: ./k8s/dev-deployment.yaml
-
-  - name: Deploy Staging
     when:
-      branch: staging
-      event: [pull_request]
+      branch:
+        include:
+          - dev
+      event:
+        include:
+          - push
+          - pull_request
+  - name: Deploy Staging
     steps:
       - applyYamlConfig:
           path: ./k8s/staging-deployment.yaml
-
-  - name: Deploy Production
     when:
-      branch: master
-      event: [tag]
+      branch:
+        include:
+          - staging
+      event:
+        include:
+          - push
+          - pull_request
+  - name: Deploy Production
     steps:
       - applyYamlConfig:
           path: ./k8s/deployment.yaml
+    when:
+      branch:
+        include:
+          - master
+      event:
+        include:
+          - push
+          - tag
+notification: {}
