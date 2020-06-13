@@ -1,5 +1,7 @@
 stages:
   - name: Test
+    when:
+      event: [push, pull_request]
     steps:
       - runScriptConfig:
           image: node:12-slim
@@ -19,10 +21,10 @@ stages:
           tag: devops/tenant:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
           pushRemote: true
           registry: registry.ngaxavilabs.com
-  - name: Build Image
+  - name: Build Image Production
     when:
       branch: master
-      event: tag
+      event: [tag]
     steps:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
@@ -34,6 +36,7 @@ stages:
   - name: Deploy Dev
     when:
       branch: dev
+      event: [push, pull_request]
     steps:
       - applyYamlConfig:
           path: ./k8s/dev-deployment.yaml
@@ -41,6 +44,7 @@ stages:
   - name: Deploy Staging
     when:
       branch: staging
+      event: [pull_request]
     steps:
       - applyYamlConfig:
           path: ./k8s/staging-deployment.yaml
@@ -48,6 +52,7 @@ stages:
   - name: Deploy Production
     when:
       branch: master
+      event: [tag]
     steps:
       - applyYamlConfig:
           path: ./k8s/deployment.yaml
