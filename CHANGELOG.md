@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/ngaxavi/tenant-service/compare/v1.1.5...v1.1.6) (2020-06-13)
+
+
+### Bug Fixes
+
+* the rancher pipeline is so doof ([f130b66](https://github.com/ngaxavi/tenant-service/commit/f130b66b169b07f9677cb8319ecf9fa068f47c52))
+
 ## [1.1.5](https://github.com/ngaxavi/tenant-service/compare/v1.1.4...v1.1.5) (2020-06-13)
 
 
