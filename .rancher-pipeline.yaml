@@ -4,8 +4,8 @@ stages:
       - runScriptConfig:
           image: node:12-slim
           shellScript: |-
-            npm ci
-            npm audit
+            npm install --quiet
+            npm audit --audit-level=moderate
             npm run lint
             npm run test
   - name: Build Image
