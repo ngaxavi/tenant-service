@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ngaxavi/tenant-service/compare/v1.1.0...v1.1.1) (2020-06-13)
+
+
+### Bug Fixes
+
+* **ci:** deployment and run process ([eb522ff](https://github.com/ngaxavi/tenant-service/commit/eb522ff8169fc6303455e9e42a3936891a7a2fbf))
+
 # [1.1.0](https://github.com/ngaxavi/tenant-service/compare/v1.0.0...v1.1.0) (2020-06-13)
 
 
