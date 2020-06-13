@@ -1,3 +1,18 @@
+# [1.1.0](https://github.com/ngaxavi/tenant-service/compare/v1.0.0...v1.1.0) (2020-06-13)
+
+
+### Bug Fixes
+
+* remove ingress into deployment ([75a1c57](https://github.com/ngaxavi/tenant-service/commit/75a1c57877a29bd8aa6fd415f0266cd4a84c3162))
+* **ci:** docker registry endpoint ([f60c103](https://github.com/ngaxavi/tenant-service/commit/f60c103b4ef5d96f032754944b42ac5bfccb20dc))
+* **ci:** testing deployment ([248a159](https://github.com/ngaxavi/tenant-service/commit/248a15967223abe7b2fb15527e05990df7c9707c))
+
+
+### Features
+
+* add config module ([8021b7d](https://github.com/ngaxavi/tenant-service/commit/8021b7d191dfc8312c981ee883c1e8851e58d46e))
+* add tenant service base template ([a849b05](https://github.com/ngaxavi/tenant-service/commit/a849b05105f79831d81076a12a193590c605fd63))
+
 # 1.0.0 (2020-06-12)
 
 
