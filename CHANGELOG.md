@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/ngaxavi/tenant-service/compare/v1.1.4...v1.1.5) (2020-06-13)
+
+
+### Bug Fixes
+
+* **ci:** after many hours the event tag was not enable ([4a6f05a](https://github.com/ngaxavi/tenant-service/commit/4a6f05af74561ce0457fca59831b049a93d53bcb))
+
 ## [1.1.4](https://github.com/ngaxavi/tenant-service/compare/v1.1.3...v1.1.4) (2020-06-13)
 
 
