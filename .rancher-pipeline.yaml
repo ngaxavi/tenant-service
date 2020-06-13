@@ -1,0 +1,53 @@
+stages:
+  - name: Test
+    steps:
+      - runScriptConfig:
+          image: node:12-slim
+          shellScript: |-
+            npm ci
+            npm audit
+            npm run lint
+            npm run test
+  - name: Build Image
+    when:
+      branch: [dev, staging]
+      event: [push, pull_request]
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: devops/tenant:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
+          pushRemote: true
+          registry: registy.ngaxavilabs.com
+  - name: Build Image
+    when:
+      branch: master
+      event: tag
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: devops/tenant:${CICD_GIT_TAG}
+          pushRemote: true
+          registry: registy.ngaxavilabs.com
+
+  - name: Deploy Dev
+    when:
+      branch: dev
+    steps:
+      - applyYamlConfig:
+          path: ./k8s/dev-deployment.yaml
+
+  - name: Deploy Staging
+    when:
+      branch: staging
+    steps:
+      - applyYamlConfig:
+          path: ./k8s/staging-deployment.yaml
+
+  - name: Deploy Production
+    when:
+      branch: master
+    steps:
+      - applyYamlConfig:
+          path: ./k8s/deployment.yaml
