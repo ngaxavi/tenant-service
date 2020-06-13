@@ -19,6 +19,8 @@ spec:
         - name: tenant
           image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
           imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+        - name: registry-devops
 
 ---
 apiVersion: v1
@@ -50,28 +52,3 @@ stringData:
   MONGO_USER: tenant-service
   MONGO_PASSWORD: MS4fgoH80A4y538OG40a
 type: Opaque
-
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: tenant
-  namespace: dev
-  labels:
-    app: tenant
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-production
-spec:
-  tls:
-    - hosts:
-        - testing.devopsapp.ngaxavilabs.com
-      secretName: testing-devopsapp-ngaxavilabs-com-tls
-  rules:
-    - hosts: testing.devopsapp.ngaxavilabs.com
-      http:
-        paths:
-          - path: /api/tenant
-            backend:
-              serviceName: tenant
-              servicePort: 3000
