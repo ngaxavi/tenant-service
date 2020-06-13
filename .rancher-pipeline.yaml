@@ -30,7 +30,7 @@ stages:
       branch: master
       event:
         include:
-          - push
+          - tag
   - name: Build Image
     steps:
       - publishImageConfig:
@@ -62,7 +62,6 @@ stages:
           - master
       event:
         include:
-          - push
           - tag
   - name: Deploy Dev
     steps:
@@ -98,6 +97,5 @@ stages:
           - master
       event:
         include:
-          - push
           - tag
 notification: {}
