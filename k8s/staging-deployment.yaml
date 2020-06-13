@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant
+  namespace: staging
+  labels:
+    app: tenant
+spec:
+  selector:
+    matchLabels:
+      app: tenant
+  template:
+    metadata:
+      labels:
+        app: tenant
+    spec:
+      containers:
+        - name: tenant
+          image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
+          imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+        - name: registry-devops
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant
+  namespace: staging
+  labels:
+    app: tenant
+spec:
+  selector:
+    app: tenant
+  ports:
+    - port: 3000
+      name: tenant-port
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tenant
+  namespace: staging
+  labels:
+    app: tenant
+stringData:
+  MONGO_USER: tenant-service
+  MONGO_PASSWORD: zrtqsTnYKU8q62wPtNzW
+type: Opaque
