@@ -16,7 +16,6 @@ stages:
       event:
         include:
           - push
-          - pull_request
   - name: Test Production
     steps:
       - runScriptConfig:
@@ -47,7 +46,6 @@ stages:
       event:
         include:
           - push
-          - pull_request
   - name: Build Image Production
     steps:
       - publishImageConfig:
@@ -74,7 +72,6 @@ stages:
       event:
         include:
           - push
-          - pull_request
   - name: Deploy Staging
     steps:
       - applyYamlConfig:
@@ -86,7 +83,6 @@ stages:
       event:
         include:
           - push
-          - pull_request
   - name: Deploy Production
     steps:
       - applyYamlConfig:
