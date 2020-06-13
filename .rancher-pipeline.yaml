@@ -18,7 +18,7 @@ stages:
           buildContext: .
           tag: devops/tenant:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
           pushRemote: true
-          registry: registy.ngaxavilabs.com
+          registry: registry.ngaxavilabs.com
   - name: Build Image
     when:
       branch: master
@@ -29,7 +29,7 @@ stages:
           buildContext: .
           tag: devops/tenant:${CICD_GIT_TAG}
           pushRemote: true
-          registry: registy.ngaxavilabs.com
+          registry: registry.ngaxavilabs.com
 
   - name: Deploy Dev
     when:
