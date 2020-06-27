@@ -1,3 +1,22 @@
+# [1.2.0](https://github.com/ngaxavi/tenant-service/compare/v1.1.6...v1.2.0) (2020-06-27)
+
+
+### Bug Fixes
+
+* config module ([5751924](https://github.com/ngaxavi/tenant-service/commit/575192413f6bab3e8b7651d575778538dfb813b3))
+* remove test ([1290ac5](https://github.com/ngaxavi/tenant-service/commit/1290ac5c656e287c068638210598abd0a5648cf8))
+
+
+### Features
+
+* add auth module ([9f4084a](https://github.com/ngaxavi/tenant-service/commit/9f4084a705c5a11ae77d57e2cc255882e3b80f63))
+* add Kafka and configure it ([a365a29](https://github.com/ngaxavi/tenant-service/commit/a365a291819942847a7b6b810ec9e3be2b2ac2e0))
+* add kafka module ([d60c385](https://github.com/ngaxavi/tenant-service/commit/d60c3854dbcc9813c213e8381b1e743643c5fe3f))
+* add logger module ([c9a4e51](https://github.com/ngaxavi/tenant-service/commit/c9a4e51ad5b234f3372d9073a08b910e0da41d7a))
+* add Mongo in project ([7169e6f](https://github.com/ngaxavi/tenant-service/commit/7169e6f3d3ad5203ce292c20db66d2e1796904fa))
+* add tenant schema ([1137312](https://github.com/ngaxavi/tenant-service/commit/113731225b16c446c11afc2d426931b5dd59ecb1))
+* add validation module ([71edea2](https://github.com/ngaxavi/tenant-service/commit/71edea2367ff57d4ca1e768801c1b397ede5c7a6))
+
 ## [1.1.6](https://github.com/ngaxavi/tenant-service/compare/v1.1.5...v1.1.6) (2020-06-13)
 
 
