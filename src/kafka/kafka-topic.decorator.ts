@@ -3,11 +3,7 @@ import { PATTERN_HANDLER_METADATA, PATTERN_METADATA, TRANSPORT_METADATA } from '
 import { Transport } from '@nestjs/microservices';
 
 export const KafkaTopic = (metadata?: string): MethodDecorator => {
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: PropertyDescriptor
-  ) => {
+  return (target: unknown, key: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
     const configService: ConfigService = new ConfigService();
     const kafkaConfig = configService.getKafka();
 
@@ -16,5 +12,5 @@ export const KafkaTopic = (metadata?: string): MethodDecorator => {
     Reflect.defineMetadata(TRANSPORT_METADATA, Transport.KAFKA, descriptor.value);
 
     return descriptor;
-  }
+  };
 };

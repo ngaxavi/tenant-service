@@ -39,24 +39,24 @@ export class LoggerService implements BaseLoggerService {
     }
   }
 
-  verbose(message: any, metadata?: any) {
+  verbose(message: string, metadata?: unknown): void {
     this.logger.verbose(message, metadata);
   }
 
-  debug(message: any, metadata?: any) {
+  debug(message: string, metadata?: unknown): void {
     this.logger.debug(message, metadata);
   }
 
-  log(message: any, metadata?: any) {
+  log(message: string, metadata?: unknown): void {
     this.logger.info(message, metadata);
   }
 
-  warn(message: any, metadata?: any) {
+  warn(message: string, metadata?: unknown): void {
     this.logger.warn(message, metadata);
     this.logOnKafka(message);
   }
 
-  error(error: any, metadata?: any) {
+  error(error: Error | string, metadata?: unknown): void {
     if (error instanceof Error) {
       this.logger.error(`${error.message}\n${error.stack}`, metadata);
       this.logOnKafka(error.message);

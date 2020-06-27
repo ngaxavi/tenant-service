@@ -8,7 +8,7 @@ import { LoggerService } from './logger.service';
 export class LoggerMiddleware implements NestMiddleware {
   constructor(@Inject('CONFIG') private readonly config: Config, private readonly logger: LoggerService) {}
 
-  use(req: Request, res: Response, next: NextFunction) {
+  use(req: Request, res: Response, next: NextFunction): void {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress;
     ip = ip === '::1' ? 'localhost' : ip;
 
