@@ -1,12 +1,14 @@
-import { LoggerService as BaseLoggerService } from '@nestjs/common';
+import { Inject, LoggerService as BaseLoggerService } from '@nestjs/common';
 import { inspect } from 'util';
 import { Logger, createLogger, format, transports } from 'winston';
+import { Config } from '@tenant/config';
+import { ClientKafka } from '@nestjs/microservices';
 
 const consoleFormat = format.combine(
   format.json(),
   format.timestamp({ format: 'HH:mm:ss.SSS' }),
   format.colorize(),
-  format.printf((info) => {
+  format.printf(info => {
     const msg = typeof info.message === 'object' ? inspect(info.message, { depth: 4 }) : info.message;
     return `[${info.level}] ${info.timestamp}   ${msg}`;
   }),
@@ -15,7 +17,10 @@ const consoleFormat = format.combine(
 export class LoggerService implements BaseLoggerService {
   private readonly logger: Logger;
 
-  constructor() {
+  constructor(
+    @Inject('CONFIG') private config: Config,
+    @Inject('KAFKA_SERVICE') private readonly kafkaClient: ClientKafka,
+  ) {
     const env = process.env.NODE_ENV || 'development';
     const level = process.env.LOG_LEVEL || 'debug';
 
@@ -48,13 +53,21 @@ export class LoggerService implements BaseLoggerService {
 
   warn(message: any, metadata?: any) {
     this.logger.warn(message, metadata);
+    this.logOnKafka(message);
   }
 
   error(error: any, metadata?: any) {
     if (error instanceof Error) {
       this.logger.error(`${error.message}\n${error.stack}`, metadata);
+      this.logOnKafka(error.message);
     } else {
       this.logger.error(error, metadata);
+      this.logOnKafka(error);
     }
+  }
+
+  private logOnKafka(message: string) {
+    const kafka = this.config.kafka;
+    this.kafkaClient.emit(`${kafka.prefix}-${kafka.clientId}-log`, message);
   }
 }
