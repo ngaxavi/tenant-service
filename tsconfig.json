@@ -13,7 +13,10 @@
     "incremental": true,
     "paths": {
       "@tenant/logger": ["src/logger"],
-      "@tenant/config": ["src/config"]
+      "@tenant/config": ["src/config"],
+      "@tenant/auth": ["src/auth"],
+      "@tenant/validation": ["src/validation"],
+      "@tenant/kafka": ["src/kafka"]
     }
   }
 }
