@@ -3,10 +3,12 @@ import { AppModule } from './app.module';
 import { ConfigService } from './config';
 import { ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { LoggerService } from '@tenant/logger';
 
 async function bootstrap() {
   const configService = new ConfigService();
   const app = await NestFactory.create(AppModule);
+  const logger: LoggerService = app.get(LoggerService);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix(configService.getPrefix());
@@ -19,13 +21,14 @@ async function bootstrap() {
         brokers: configService.getKafka().brokerUris,
       },
       consumer: {
-        groupId: `${configService.getKafka().clientId}-consumer`,
+        groupId: `${configService.getKafka().prefix}-${configService.getKafka().clientId}-consumer`,
       },
     },
   });
 
+  await app.startAllMicroservicesAsync();
   await app.listen(configService.getPort());
-  console.log(
+  logger.log(
     `${configService.getConfig().name} (${configService.getConfig().id}) running on port ${configService.getPort()}`,
   );
 }
