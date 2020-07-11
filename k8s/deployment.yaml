@@ -19,6 +19,13 @@ spec:
         - name: tenant
           image: ${CICD_IMAGE}:${CICD_GIT_TAG}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_PREFIX
+              value: production
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: "9094"
       imagePullSecrets:
         - name: registry-devops
 
