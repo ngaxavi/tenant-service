@@ -25,7 +25,7 @@ export class ConfigService {
     };
 
     const kafka: KafkaConfig = {
-      clientId: 'demo',
+      clientId: 'tenant',
       prefix: process.env.KAFKA_PREFIX || 'local',
     };
 
