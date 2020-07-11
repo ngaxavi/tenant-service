@@ -1,3 +1,5 @@
+import { EventHandler } from './events/event.handler';
+import { CommandHandler } from './commands/command.handler';
 import { Module } from '@nestjs/common';
 
 import { TenantController } from './tenant.controller';
@@ -9,6 +11,6 @@ import { TenantSchema } from './tenant.schema';
 @Module({
   imports: [LoggerModule, MongooseModule.forFeature([{ name: 'Tenant', schema: TenantSchema }])],
   controllers: [TenantController],
-  providers: [TenantService],
+  providers: [TenantService, CommandHandler, EventHandler],
 })
 export class TenantModule {}
