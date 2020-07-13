@@ -56,6 +56,7 @@ metadata:
   labels:
     app: tenant
 stringData:
-  MONGO_USER: tenant-service
-  MONGO_PASSWORD: zrtqsTnYKU8q62wPtNzW
+  MONGO_USER: ""
+  MONGO_PASSWORD: ""
+  MONGO_HOST: database
 type: Opaque
