@@ -1,3 +1,20 @@
+# [1.3.0](https://github.com/ngaxavi/tenant-service/compare/v1.2.0...v1.3.0) (2020-07-13)
+
+
+### Bug Fixes
+
+* config service ([9920737](https://github.com/ngaxavi/tenant-service/commit/9920737c0246b129757d99131ec4ce1b90fe6d43))
+* linting ([bfedff2](https://github.com/ngaxavi/tenant-service/commit/bfedff20bbc492a8069ba0c78540014f1f07234b))
+
+
+### Features
+
+* add commands pattern ([b64d68f](https://github.com/ngaxavi/tenant-service/commit/b64d68ff6e05df554936e09e57504f3dc5f9af10))
+* add dto ([041db9c](https://github.com/ngaxavi/tenant-service/commit/041db9c2cb9e2d5ae062b151343cc85cf5aad0ff))
+* add event pattern ([adf9ed7](https://github.com/ngaxavi/tenant-service/commit/adf9ed77bb42d2548dc990533bb0142dcd234aa5))
+* add kafka commands ([e1c96c3](https://github.com/ngaxavi/tenant-service/commit/e1c96c314867ec6157c2652e4c56548bb95e3afa))
+* add schema and integrate kafka ([38baa1b](https://github.com/ngaxavi/tenant-service/commit/38baa1be1b2f58a6f2fcfaaab7829d88d30574fb))
+
 # [1.2.0](https://github.com/ngaxavi/tenant-service/compare/v1.1.6...v1.2.0) (2020-06-27)
 
 
