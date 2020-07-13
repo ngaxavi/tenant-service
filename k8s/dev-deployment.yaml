@@ -19,6 +19,13 @@ spec:
         - name: tenant
           image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_PREFIX
+              value: production
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: "9094"
       imagePullSecrets:
         - name: registry-devops
 
@@ -49,6 +56,7 @@ metadata:
   labels:
     app: tenant
 stringData:
-  MONGO_USER: tenant-service
-  MONGO_PASSWORD: MS4fgoH80A4y538OG40a
+  MONGO_USER: ""
+  MONGO_PASSWORD: ""
+  MONGO_HOST: database
 type: Opaque
