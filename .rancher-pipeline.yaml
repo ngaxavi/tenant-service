@@ -7,7 +7,6 @@ stages:
             npm install --quiet
             npm audit --audit-level=moderate
             npm run lint
-            npm run test
     when:
       branch:
         include:
@@ -24,7 +23,6 @@ stages:
             npm install --quiet
             npm audit --audit-level=moderate
             npm run lint
-            npm run test
     when:
       event:
         include:
