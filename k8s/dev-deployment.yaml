@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: KAFKA_PREFIX
-              value: production
+              value: dev
             - name: KAFKA_HOST
               value: kafka.kafka
             - name: KAFKA_PORT
