@@ -56,7 +56,7 @@ export class TenantController {
   }
 
   @Get()
-  // @Roles('read')
+  @Roles('read')
   async findAll(): Promise<Tenant[]> {
     return this.tenantService.findAll();
   }
