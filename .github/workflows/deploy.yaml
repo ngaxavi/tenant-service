@@ -1,0 +1,5 @@
+name: Docker Image Builder
+on:
+  deployment:
+  push:
+    branches: [staging, master]
