@@ -41,6 +41,7 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo $KUBECONFIG > ~/.kube/config
+          cat ~/.kube/config
         shell: bash
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
