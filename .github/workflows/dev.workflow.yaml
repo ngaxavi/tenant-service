@@ -40,7 +40,7 @@ jobs:
       - name: Add Kube config
         run: |
           mkdir -p ~/.kube
-          echo $KUBECONFIG | base64 -d > ~/.kube/config
+          echo "$KUBECONFIG" | base64 -d > ~/.kube/config
         shell: bash
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
