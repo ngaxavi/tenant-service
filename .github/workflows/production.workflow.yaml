@@ -1,8 +1,8 @@
-name: Dev Workflow - Test, Build and Deploy Image
+name: Production Workflow - Test, Build and Deploy Image
 on:
   workflow_run:
-    workflows: [Test]
-    branches: [dev]
+    workflows: [Release]
+    branches: [master]
     types:
       - completed
 jobs:
@@ -34,7 +34,7 @@ jobs:
       - name: Build and Deploy
         uses: hiberbee/github-action-skaffold@master
         with:
-          command: run -p dev
+          command: run -p production
           kubeconfig: ~/.kube/config
       - name: Check deployed app
-        run: kubectl get deployments -n dev
+        run: kubectl get deployments -n production

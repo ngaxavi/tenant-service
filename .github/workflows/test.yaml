@@ -17,7 +17,7 @@ jobs:
           node-version: 12
       - name: Install dependencies
         run: npm install --quiet
-      - name: Audit dependencies
-        run: npm audit --audit-level=moderate
+#      - name: Audit dependencies
+#        run: npm audit --audit-level=moderate
       - name: Linting
         run: npm run lint
