@@ -1,10 +1,47 @@
-apiVersion: skaffold/v2beta5
+apiVersion: skaffold/v2beta6
 kind: Config
 metadata:
-  name: tenant
-
-profiles:
-  
+  name: tenant-service
 build:
+  tagPolicy:
+    gitCommit:
+      variant: AbbrevCommitSha
   artifacts:
-    - image:
+  - image: registry.ngaxavilabs.com/devops/tenant
+    context: .
+    docker:
+      dockerfile: Dockerfile
+      cacheFrom:
+        - registry.ngaxavilabs.com/devops/tenant:latest
+deploy:
+  kustomize:
+    paths:
+    - k8s/overlay/dev
+profiles:
+- name: dev
+  patches:
+    - op: add
+      path: /build/tagPolicy/gitCommit/prefix
+      value: staging
+  deploy:
+    kustomize:
+      paths:
+      - k8s/overlay/dev
+- name: production
+  patches:
+    - op: replace
+      path: /build/tagPolicy/gitCommit/variant
+      value: Tags
+  deploy:
+    kustomize:
+      paths:
+      - k8s/overlay/production
+- name: staging
+  patches:
+    - op: add
+      path: /build/tagPolicy/gitCommit/prefix
+      value: staging
+  deploy:
+    kustomize:
+      paths:
+      - k8s/overlay/staging
