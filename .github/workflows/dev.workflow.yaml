@@ -9,7 +9,6 @@ on:
 jobs:
   build_deploy_image:
     name: Build and Deploy Image
-    needs: test
     runs-on: ubuntu-20.04
     steps:
       - name: Extract cache
