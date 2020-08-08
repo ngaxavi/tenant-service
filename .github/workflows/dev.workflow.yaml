@@ -47,7 +47,8 @@ jobs:
       - name: Build and Deploy
         uses: hiberbee/github-action-skaffold@master
         with:
-          command: run -p dev
+          command: run
+          profile: dev
           kubeconfig: ~/.kube/config
       - name: Check deployed app
         run: kubectl get deployments -n dev
