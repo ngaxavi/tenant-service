@@ -1,0 +1,24 @@
+name: Dev Workflow - Test, Build and Deploy Image
+on:
+  workflow_run:
+    workflows: [Test]
+    branches: [dev]
+    types:
+      - completed
+      - requested
+jobs:
+  build_deploy_image:
+    name: Build and Deploy Image
+    needs: test
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Build and Deploy
+        uses: anarcher/skaffold-action@v1
+        with:
+          skaffold: run
+          kustomize: edit set image hello-world:${IMAGE_TAG}
+          kustomize_path: ./k8s/prod/
+          docker_username: ${{ secrets.DOCKER_GITHUB_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_GITHUB_PASSWORD }}
+        env:
+          IMAGE_TAG: ${{ github.ref }}

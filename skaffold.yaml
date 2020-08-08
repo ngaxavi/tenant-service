@@ -1,0 +1,10 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: tenant
+
+profiles:
+  
+build:
+  artifacts:
+    - image:

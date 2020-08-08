@@ -1,5 +1,12 @@
-name: Docker Image Builder
+name: Deploy
 on:
-  deployment:
   push:
-    branches: [staging, master]
+    branches: [dev, staging, master]
+
+jobs:
+  build_docker_image_and_deploy:
+    name: Build docker image and deploy
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+

@@ -1,0 +1,10 @@
+name: Staging Workflow - Build and Deploy Image
+on:
+  push:
+    branches:
+      - staging
+jobs:
+  build_deploy_image:
+    name: Build and Deploy Image
+    needs: test
+    runs-on: ubuntu-18.04

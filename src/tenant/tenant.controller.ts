@@ -38,7 +38,7 @@ export class TenantController {
   ) {}
 
   @Post()
-  // @Roles('create')
+  @Roles('create')
   async createOne(@Body() dto: CreateTenantDto): Promise<Tenant> {
     const tenant: Tenant = await this.tenantService.createOne(dto);
 
