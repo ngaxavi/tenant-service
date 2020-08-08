@@ -1,14 +1,10 @@
 name: Production Workflow - Build and Deploy Image
 on:
-  workflow_run:
-    workflows: ["Release"]
-    branches: [master]
-    types:
-      - completed
+  release:
+    types: [published, created, edited]
 jobs:
   build_deploy_image:
     name: Build and Deploy Image
-    needs: test
     runs-on: ubuntu-20.04
     steps:
       - name: Extract cache
