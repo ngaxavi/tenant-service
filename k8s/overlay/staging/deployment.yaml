@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tenant
+  name: tenant
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+        - name: tenant
+      containers:
+        - $setElementOrder/env:
+            - name: KAFKA_PREFIX
+            - name: KAFKA_HOST
+            - name: KAFKA_PORT
+          env:
+            - name: KAFKA_PREFIX
+              value: staging
+          name: tenant

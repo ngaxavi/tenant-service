@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant
+  labels:
+    app: tenant
+spec:
+  selector:
+    matchLabels:
+      app: tenant
+  template:
+    metadata:
+      labels:
+        app: tenant
+    spec:
+      containers:
+        - name: tenant
+          image: registry.ngaxavilabs.com/devops/tenant
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_PREFIX
+              value: local
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: "9094"
+      imagePullSecrets:
+        - name: registry-devops
