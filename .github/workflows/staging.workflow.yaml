@@ -8,31 +8,31 @@ jobs:
     name: Build and Deploy Image
     runs-on: ubuntu-20.04
     if: ${{ github.event.pull_request.merged }}
-      steps:
-        - name: Extract cache
-          uses: actions/cache@v2
-          with:
-            path: ~/.skaffold/cache
-            key: ${{ runner.os }}-skaffold-1.13.0
-            restore-keys: ${{ runner.os }}-skaffold-
-        - name: Checkout source
-          uses: actions/checkout@v2
-        - name: Authenticate with Docker registry
-          run: echo $REGISTRY_PWD | docker login registry.ngaxavilabs.com -u $REGISTRY_USER --password-stdin
-          env:
-            - REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-            - REGISTRY_PWD: ${{ secrets.REGISTRY_PASSWORD }}
-        - name: Add Kube config
-          run: |
-            mkdir -p ~/.kube
-            echo $KUBECONFIG > ~/.kube/config
-          shell: bash
-          env:
-            - KUBECONFIG: ${{ secrets.KUBECONFIG }}
-        - name: Build and Deploy
-          uses: hiberbee/github-action-skaffold@master
-          with:
-            command: run -p staging
-            kubeconfig: ~/.kube/config
-        - name: Check deployed app
-          run: kubectl get deployments -n staging
+    steps:
+      - name: Extract cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.skaffold/cache
+          key: ${{ runner.os }}-skaffold-1.13.0
+          restore-keys: ${{ runner.os }}-skaffold-
+      - name: Checkout source
+        uses: actions/checkout@v2
+      - name: Authenticate with Docker registry
+        run: echo $REGISTRY_PWD | docker login registry.ngaxavilabs.com -u $REGISTRY_USER --password-stdin
+        env:
+          - REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          - REGISTRY_PWD: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Add Kube config
+        run: |
+          mkdir -p ~/.kube
+          echo $KUBECONFIG > ~/.kube/config
+        shell: bash
+        env:
+          - KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      - name: Build and Deploy
+        uses: hiberbee/github-action-skaffold@master
+        with:
+          command: run -p staging
+          kubeconfig: ~/.kube/config
+      - name: Check deployed app
+        run: kubectl get deployments -n staging
