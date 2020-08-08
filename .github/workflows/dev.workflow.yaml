@@ -1,7 +1,7 @@
-name: Dev Workflow - Test, Build and Deploy Image
+name: Dev Workflow - Build and Deploy Image
 on:
   workflow_run:
-    workflows: [Test]
+    workflows: ["Test"]
     branches: [dev]
     types:
       - completed

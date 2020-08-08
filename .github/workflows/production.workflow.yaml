@@ -1,7 +1,7 @@
-name: Production Workflow - Test, Build and Deploy Image
+name: Production Workflow - Build and Deploy Image
 on:
   workflow_run:
-    workflows: [Release]
+    workflows: ["Release"]
     branches: [master]
     types:
       - completed

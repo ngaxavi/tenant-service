@@ -1,4 +1,4 @@
-name: Staging Workflow - Test, Build and Deploy Image
+name: Staging Workflow - Build and Deploy Image
 on:
   push:
     branches: [staging]
