@@ -22,7 +22,7 @@ profiles:
   patches:
     - op: add
       path: /build/tagPolicy/gitCommit/prefix
-      value: staging
+      value: dev-
   deploy:
     kustomize:
       paths:
@@ -40,7 +40,7 @@ profiles:
   patches:
     - op: add
       path: /build/tagPolicy/gitCommit/prefix
-      value: staging
+      value: staging-
   deploy:
     kustomize:
       paths:
