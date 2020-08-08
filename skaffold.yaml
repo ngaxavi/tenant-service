@@ -16,7 +16,7 @@ build:
 deploy:
   kustomize:
     paths:
-    - k8s/overlay/dev
+    - ./k8s/overlay/dev
 profiles:
 - name: dev
   patches:
@@ -26,7 +26,7 @@ profiles:
   deploy:
     kustomize:
       paths:
-      - k8s/overlay/dev
+      - ./k8s/overlay/dev
 - name: production
   patches:
     - op: replace
@@ -44,4 +44,4 @@ profiles:
   deploy:
     kustomize:
       paths:
-      - k8s/overlay/staging
+      - ./k8s/overlay/staging
