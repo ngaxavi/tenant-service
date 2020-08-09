@@ -1,0 +1,4 @@
+resources:
+  - overlay/dev
+  - overlay/staging
+  - overlay/production

@@ -1,3 +1,4 @@
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -17,7 +18,7 @@ spec:
     spec:
       containers:
         - name: tenant
-          image: ${CICD_IMAGE}:${CICD_GIT_TAG}
+          image: registry.ngaxavilabs.com/devops/tenant
           imagePullPolicy: IfNotPresent
           env:
             - name: KAFKA_PREFIX
