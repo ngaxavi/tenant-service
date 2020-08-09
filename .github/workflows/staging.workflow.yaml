@@ -20,20 +20,20 @@ jobs:
       - name: Authenticate with Docker registry
         run: echo $REGISTRY_PWD | docker login registry.ngaxavilabs.com -u $REGISTRY_USER --password-stdin
         env:
-          - REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
-          - REGISTRY_PWD: ${{ secrets.REGISTRY_PASSWORD }}
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_PWD: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Add Kube config
         run: |
           mkdir -p ~/.kube
-          echo $KUBECONFIG > ~/.kube/config
+          echo "$KUBECONFIG" | base64 -d > /tmp/config
+          export KUBECONFIG=/tmp/config
         shell: bash
         env:
-          - KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
       - name: Build and Deploy
         uses: hiberbee/github-action-skaffold@latest
         with:
           command: run
           profile: staging
-          kubeconfig: ~/.kube/config
       - name: Check deployed app
         run: kubectl get deployments -n staging

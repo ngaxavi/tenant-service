@@ -40,7 +40,8 @@ jobs:
       - name: Add Kube config
         run: |
           mkdir -p ~/.kube
-          echo "$KUBECONFIG" | base64 -d > ~/.kube/config
+          echo "$KUBECONFIG" | base64 -d > /tmp/config
+          export KUBECONFIG=/tmp/config
         shell: bash
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
@@ -49,6 +50,5 @@ jobs:
         with:
           command: run
           profile: dev
-          kubeconfig: ~/.kube/config
       - name: Check deployed app
         run: kubectl get deployments -n dev
