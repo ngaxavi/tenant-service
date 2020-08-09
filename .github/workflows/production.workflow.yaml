@@ -22,8 +22,8 @@ jobs:
           REGISTRY_PWD: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Add Kube config
         run: |
-          mkdir -p ~/.kube
-          echo "$KUBECONFIG" | base64 -d > /tmp/config
+          mkdir -p /home/runner/.kube
+          echo "$KUBECONFIG" | base64 -d > /home/runner/.kube/config
         shell: bash
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
@@ -32,6 +32,6 @@ jobs:
         with:
           command: run
           profile: production
-          kubeconfig: /tmp/config
+          kubeconfig: /home/runner/.kube/config
       - name: Check deployed app
         run: kubectl get deployments -n production
