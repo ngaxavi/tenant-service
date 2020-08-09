@@ -35,5 +35,6 @@ jobs:
         with:
           command: run
           profile: staging
+          kubeconfig: /tmp/config
       - name: Check deployed app
         run: kubectl get deployments -n staging

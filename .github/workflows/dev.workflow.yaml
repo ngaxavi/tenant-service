@@ -50,5 +50,6 @@ jobs:
         with:
           command: run
           profile: dev
+          kubeconfig: /tmp/config
       - name: Check deployed app
         run: kubectl get deployments -n dev

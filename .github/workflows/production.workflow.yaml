@@ -33,5 +33,6 @@ jobs:
         with:
           command: run
           profile: production
+          kubeconfig: /tmp/config
       - name: Check deployed app
         run: kubectl get deployments -n production
