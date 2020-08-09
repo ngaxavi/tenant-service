@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/ngaxavi/tenant-service/compare/v1.3.0...v1.3.1) (2020-08-09)
+
+
+### Bug Fixes
+
+* command handler typing ([66d54a1](https://github.com/ngaxavi/tenant-service/commit/66d54a1b4d519041e1d184615f6a8dc50d39bb74))
+* tenant roles ([e223b16](https://github.com/ngaxavi/tenant-service/commit/e223b16573884643a7efd1ad3f1fbff3acd4b539))
+
 # [1.3.0](https://github.com/ngaxavi/tenant-service/compare/v1.2.0...v1.3.0) (2020-07-13)
 
 
