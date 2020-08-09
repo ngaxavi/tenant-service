@@ -45,7 +45,7 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
       - name: Build and Deploy
-        uses: hiberbee/github-action-skaffold@master
+        uses: hiberbee/github-action-skaffold@latest
         with:
           command: run
           profile: dev
