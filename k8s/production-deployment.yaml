@@ -1,0 +1,63 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant
+  namespace: production
+  labels:
+    app: tenant
+spec:
+  selector:
+    matchLabels:
+      app: tenant
+  template:
+    metadata:
+      labels:
+        app: tenant
+    spec:
+      containers:
+        - name: tenant
+          image: ${CICD_IMAGE}:${CICD_GIT_TAG}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_PREFIX
+              value: production
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: "9094"
+      imagePullSecrets:
+        - name: registry-devops
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant
+  namespace: production
+  labels:
+    app: tenant
+spec:
+  selector:
+    app: tenant
+  ports:
+    - port: 3000
+      name: tenant-port
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tenant
+  namespace: production
+  labels:
+    app: tenant
+stringData:
+  MONGO_USER: ''
+  MONGO_PASSWORD: ''
+  MONGO_HOST: database
+type: Opaque
