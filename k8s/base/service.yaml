@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant
+  labels:
+    app: tenant
+spec:
+  selector:
+    app: tenant
+  ports:
+    - port: 3000
+      name: tenant-port
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP

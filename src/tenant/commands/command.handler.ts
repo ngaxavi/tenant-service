@@ -4,6 +4,7 @@ import { Command } from './command';
 import { CreateTenantCommand } from './create-tenant.command';
 import { Tenant } from '../tenant.schema';
 import { Injectable } from '@nestjs/common';
+import { CreateTenantDto } from '../dto';
 
 @Injectable()
 export class CommandHandler {
@@ -20,6 +21,6 @@ export class CommandHandler {
   }
 
   private async handleCreateTenantCommand(command: CreateTenantCommand): Promise<Tenant> {
-    return this.tenantService.createOne(command.data);
+    return this.tenantService.createOne(command.data as CreateTenantDto);
   }
 }
