@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: tenant
-          image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_GIT_COMMIT}
+          image: registry.ngaxavilabs.com/devops/tenant
           imagePullPolicy: IfNotPresent
           env:
             - name: KAFKA_PREFIX
