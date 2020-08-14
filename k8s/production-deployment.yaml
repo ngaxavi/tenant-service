@@ -61,3 +61,25 @@ stringData:
   MONGO_PASSWORD: ''
   MONGO_HOST: database
 type: Opaque
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tenant
+  namespace: production
+  labels:
+    app: tenant
+spec:
+  tls:
+    - hosts:
+        - testing.devopsapp.ngaxavilabs.com
+      secretName: testing-devopsapp-ngaxavilabs-com-tls
+  rules:
+    - host: testing.devopsapp.ngaxavilabs.com
+      http:
+        paths:
+          - backend:
+              serviceName: tenant
+              servicePort: 3000
+            path: /api/tenants
