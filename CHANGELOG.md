@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/ngaxavi/tenant-service/compare/v1.3.1...v1.3.2) (2020-08-17)
+
+
+### Bug Fixes
+
+* id parameter on controller ([f42ac3f](https://github.com/ngaxavi/tenant-service/commit/f42ac3f8b8a834323c1e37b1821c9cb36bbdc3c6))
+
 ## [1.3.1](https://github.com/ngaxavi/tenant-service/compare/v1.3.0...v1.3.1) (2020-08-09)
 
 
