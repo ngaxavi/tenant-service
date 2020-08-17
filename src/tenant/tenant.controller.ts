@@ -61,7 +61,7 @@ export class TenantController {
     return this.tenantService.findAll();
   }
 
-  @Get('id')
+  @Get(':id')
   @Roles('read')
   async findOne(@Param('id', new MongoPipe()) id: string): Promise<Tenant> {
     return this.tenantService.findOne(id);
