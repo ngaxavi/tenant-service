@@ -20,6 +20,10 @@ spec:
         - name: tenant
           image: registry.ngaxavilabs.com/devops/tenant
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: tenant
+                optional: false
           env:
             - name: KAFKA_PREFIX
               value: production
@@ -57,8 +61,8 @@ metadata:
   labels:
     app: tenant
 stringData:
-  MONGO_USER: ''
-  MONGO_PASSWORD: ''
+  MONGO_USER: tenant-service
+  MONGO_PASSWORD: MS4fgoH80A4y538OG40a
   MONGO_HOST: database
 type: Opaque
 
