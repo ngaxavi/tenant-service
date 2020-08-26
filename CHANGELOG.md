@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/ngaxavi/tenant-service/compare/v1.4.0...v1.4.1) (2020-08-26)
+
+
+### Bug Fixes
+
+* ingress for deployment for production and staging ([b1782b1](https://github.com/ngaxavi/tenant-service/commit/b1782b164ce98cb173f0cae5e3fbb71ebadca05d))
+
 # [1.4.0](https://github.com/ngaxavi/tenant-service/compare/v1.3.2...v1.4.0) (2020-08-26)
 
 
