@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/ngaxavi/tenant-service/compare/v1.3.2...v1.4.0) (2020-08-26)
+
+
+### Bug Fixes
+
+* ci port deployment ([b91a107](https://github.com/ngaxavi/tenant-service/commit/b91a1076b1122a22e0df2a4032f6f9adde37b36d))
+
+
+### Features
+
+* add occupants services and so more ([98cfa4f](https://github.com/ngaxavi/tenant-service/commit/98cfa4fae40644ab20dfa28bed70cee80ac6578c))
+
 ## [1.3.2](https://github.com/ngaxavi/tenant-service/compare/v1.3.1...v1.3.2) (2020-08-17)
 
 
