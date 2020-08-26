@@ -63,6 +63,7 @@ stringData:
   MONGO_USER: tenant-service
   MONGO_PASSWORD: MS4fgoH80A4y538OG40a
   MONGO_HOST: database
+  PORT: "3000"
 type: Opaque
 
 ---

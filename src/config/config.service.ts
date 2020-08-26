@@ -11,7 +11,7 @@ export class ConfigService {
       publicKey:
         '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh6UwXpi4Io7gx0amwCVy/z1jGgw1jiGT8Hxgbspvt7nZ7PtRmXxJXnFfQOMuTYDEj0PoSr258NofSeHt9vQkxMGVNbwrMetLMbo9nn45MioZzDEu29QfmkpIXaAbJxBVy1Zw8JTqe1rTYbSnqDeutVzEt07W08oQw6yk5icXnh189oxo1QDf4jZYZVQHQ9yGNpGG7lsSeszQZlMxpuz8cL2mo0qhyGea41f/HJ99UdSL7whBW8jCPxaUznSS4zHYnF/XaA4xx2v8T4T05U8DKMeIQZW5xJnGis7Q9QB4pCAcWJnJxix3C6R+YvNlIXwvqbBSFumtc/oO+weYFD7euQIDAQAB\n-----END PUBLIC KEY-----',
       realm: 'devops',
-      resource: 'tenant',
+      resource: 'tenant-service',
       secret: '',
     };
 
@@ -20,7 +20,7 @@ export class ConfigService {
       issuer: process.env.AUTH_ISSUER || authDefault.issuer,
       publicKey: process.env.AUTH_PUBLIC_KEY || authDefault.publicKey,
       realm: process.env.AUTH_REALM || authDefault.realm,
-      resource: process.env.AUTH_RESOURCE || authDefault.resource || 'tenant',
+      resource: process.env.AUTH_RESOURCE || authDefault.resource || 'tenant-service',
       secret: process.env.AUTH_SECRET || authDefault.secret,
     };
 
@@ -52,7 +52,7 @@ export class ConfigService {
     this.config = {
       id: uuid(),
       name: 'tenant-service',
-      port: +process.env.PORT || 3000,
+      port: +process.env.PORT || 3002,
       prefix: process.env.PREFIX || 'api',
       env: process.env.NODE_ENV || 'development',
       auth,
