@@ -15,13 +15,5 @@ export class UpdateOccupantDto {
 
   @IsString()
   @IsOptional()
-  tenant: string;
-
-  @IsString()
-  @IsOptional()
-  building: string;
-
-  @IsString()
-  @IsOptional()
   flat: string;
 }
