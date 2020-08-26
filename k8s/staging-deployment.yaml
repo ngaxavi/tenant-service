@@ -29,7 +29,7 @@ spec:
             - name: KAFKA_HOST
               value: kafka.kafka
             - name: KAFKA_PORT
-              value: "9094"
+              value: '9094'
       imagePullSecrets:
         - name: registry-devops
 
@@ -63,7 +63,7 @@ stringData:
   MONGO_USER: tenant-service
   MONGO_PASSWORD: MS4fgoH80A4y538OG40a
   MONGO_HOST: database
-  PORT: "3000"
+  PORT: '3000'
 type: Opaque
 
 ---
@@ -77,10 +77,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - testing.devopsapp.ngaxavilabs.com
-      secretName: testing-devopsapp-ngaxavilabs-com-tls
+        - staging.devopsapp.ngaxavilabs.com
+      secretName: staging-devopsapp-ngaxavilabs-com-tls
   rules:
-    - host: testing.devopsapp.ngaxavilabs.com
+    - host: staging.devopsapp.ngaxavilabs.com
       http:
         paths:
           - backend:
