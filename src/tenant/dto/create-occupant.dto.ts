@@ -17,13 +17,5 @@ export class CreateOccupantDto {
 
   @IsString()
   @IsNotEmpty()
-  tenant: string;
-
-  @IsString()
-  @IsNotEmpty()
-  building: string;
-
-  @IsString()
-  @IsNotEmpty()
   flat: string;
 }

@@ -26,6 +26,6 @@ import { JwtModule } from '@nestjs/jwt';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(AuthMiddleware, LoggerMiddleware).forRoutes('api/(.*)?');
+    consumer.apply(AuthMiddleware, LoggerMiddleware).forRoutes('*');
   }
 }
