@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpService, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Occupant } from './tenant.schema';
@@ -7,11 +7,16 @@ import { CreateOccupantDto, UpdateOccupantDto } from './dto';
 import { ClientKafka } from '@nestjs/microservices';
 import { ConfigService } from '@tenant/config';
 import { v4 as uuid } from 'uuid';
+import { ExtendedRequest } from '@tenant/auth';
+import { BillingOccupant, RoomMinMaxMeterValue } from './tenant.interface';
+import { forkJoin } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TenantService {
   constructor(@InjectModel('Occupant') private readonly model: Model<Occupant>,
               @Inject('KAFKA_SERVICE') private kafkaClient: ClientKafka,
+              private readonly httpService: HttpService,
               private readonly config: ConfigService,
               private readonly logger: LoggerService) {}
 
@@ -145,4 +150,38 @@ export class TenantService {
   }
 
 
+  async computeBillingForUser(id: string, req: ExtendedRequest): Promise<BillingOccupant> {
+    const occupant = await this.model.findById(id).exec();
+
+    if (!occupant) {
+      throw new NotFoundException();
+    }
+    this.logger.debug(`TenantService - Heating cost billing for flat ${occupant.flat} `);
+
+    return new Promise<BillingOccupant>(async (resolve, reject) => {
+      try {
+        const headers = { Authorization: req.header('authorization') };
+        let address;
+        let roomsMeterValues;
+        forkJoin([this.httpService
+          .get(`http://building:3000/api/buildings/flats/${occupant.flat}/address`, { headers }).pipe(tap((res) => address = res.data.address)),
+          this.httpService
+            .get(`http://device:3000/api/devices/${occupant.flat}/meter`, { headers, params: { startTime: occupant.moveInDate.toISOString() } })
+            .pipe(tap((res) => roomsMeterValues = res.data))
+        ]).pipe(take(1)).subscribe((res) => {
+          const billings = roomsMeterValues.map((rMeterValues: RoomMinMaxMeterValue) => {
+            const billingValue = (rMeterValues.maxMeterValue - rMeterValues.minMeterValue)  * 6 / 100;
+            return {
+              ...rMeterValues,
+              billingValue
+            };
+          });
+          return resolve({ occupant, address, billings })
+        });
+      } catch (err) {
+        this.logger.error(err);
+        return reject(err);
+      }
+    });
+  }
 }

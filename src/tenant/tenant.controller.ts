@@ -6,17 +6,18 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, Req,
   UseFilters,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { TenantService } from './tenant.service';
-import { Roles, RolesGuard } from '@tenant/auth';
+import { ExtendedRequest, Roles, RolesGuard } from '@tenant/auth';
 import { KafkaExceptionFilter } from '@tenant/kafka';
 import { Occupant } from './tenant.schema';
 import { CreateOccupantDto, UpdateOccupantDto } from './dto';
+import { BillingOccupant } from './tenant.interface';
 
 @Controller('tenants/occupants')
 @UseGuards(RolesGuard)
@@ -43,6 +44,12 @@ export class TenantController {
   @Roles('read')
   async findOne(@Param('id', new MongoPipe()) id: string): Promise<Occupant> {
     return this.tenantService.findOne(id);
+  }
+
+  @Get(':id/billing')
+  @Roles('read')
+  async billingForUser(@Param('id', new MongoPipe()) id: string, @Req() req: ExtendedRequest): Promise<BillingOccupant> {
+    return this.tenantService.computeBillingForUser(id, req);
   }
 
   @Put(':id')
