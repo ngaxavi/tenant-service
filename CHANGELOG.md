@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/ngaxavi/tenant-service/compare/v1.4.1...v1.5.0) (2020-09-04)
+
+
+### Features
+
+* add endpoint to calculate heating cost for an occupant ([7347899](https://github.com/ngaxavi/tenant-service/commit/73478997dc970288d3f7107e920993116568419e))
+
 ## [1.4.1](https://github.com/ngaxavi/tenant-service/compare/v1.4.0...v1.4.1) (2020-08-26)
 
 
