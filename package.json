@@ -59,7 +59,7 @@
     "jest": "26.2.2",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "semantic-release": "^17.1.1",
+    "semantic-release": "^19.0.3",
     "supertest": "^4.0.2",
     "ts-jest": "26.1.4",
     "ts-loader": "^8.0.2",
